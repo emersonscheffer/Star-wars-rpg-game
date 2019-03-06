@@ -48,25 +48,47 @@ var obi = {
     nickname: "obi",
     attackPower: 6,
     counterAttack: 10,
-    healthPoints: 120,
+    healthPoints: 180,
     background: 'url("https://vignette.wikia.nocookie.net/nanohaclonewars/images/9/95/Obi_wan_kenobi.png/revision/latest?cb=20160131023954"'
 }
 
 
-function character(player){
-    $('section').append('<div class="circle" id="'+ player.nickname+'">');
-    $('#'+ player.nickname).append('<h1 class="name" id="name'+ player.nickname + '">');
-    $('#name'+ player.nickname).append(player.name);
-    $('#'+ player.nickname).css("background-image", player.background);
+function character(player) {
+    $('section').append('<div class="circle" id="' + player.nickname + '">');
+    $('#' + player.nickname).append('<h1 class="name" id="name' + player.nickname + '">');
+    $('#name' + player.nickname).append(player.name);
+    $('#' + player.nickname).css("background-image", player.background);
 
-    $('#'+ player.nickname).append('<h2 class="hp" id="hp'+ player.nickname + '">');
+    $('#' + player.nickname).append('<h2 class="hp" id="hp' + player.nickname + '">');
     $('#hp' + player.nickname).append(player.healthPoints);
-    //$('#'+ player.nickname).append(player.healthPoints);
-    $('#'+ player.nickname).click(function(){
-        console.log("it works " + player.name);
+    $('#' + player.nickname).click(function () {
+        $('#' + player.nickname).attr('data-state', "selected");
+        console.log("you selected " + player.name);
+        //distributingCharacters();
     })
 }
-ahsoka.healthPoints = ahsoka.healthPoints - 25;
+
+
+// function distributingCharacters(){
+//     var state = $(this).attr('data-state');
+//     if(state === "selected"){
+        
+//     }
+// }
+
+
+
+
+var attacking = 0;
+
+function attack(player) {
+
+    if (attacking === 0) {
+        attacking = player.attackPower;
+    }
+    player.attackPower = player.attackPower + attacking;
+}
+
 character(ahsoka);
 
 character(obi);
@@ -77,4 +99,12 @@ character(anakin);
 
 character(maul);
 
-
+console.log("=======----------=============-----------");
+console.log("=======----------=============-----------");
+console.log(obi.attackPower);
+attack(obi);
+console.log(obi.attackPower);
+attack(obi);
+console.log(obi.attackPower);
+attack(obi);
+console.log(obi.attackPower);
